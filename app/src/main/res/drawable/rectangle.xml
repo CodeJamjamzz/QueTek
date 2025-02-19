@@ -2,7 +2,7 @@
 
     <solid android:color="@android:color/white"/> <!-- White background color -->
 
-    <stroke android:color="@android:color/black" android:width="2dp"/> <!-- Black border with 2dp width -->
+    <stroke android:color="@color/black" android:width="2dp"/> <!-- Black border with 2dp width -->
 
     <corners android:radius="16dp"/>
 

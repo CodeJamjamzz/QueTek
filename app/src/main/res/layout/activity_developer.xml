@@ -4,25 +4,23 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     android:padding="20dp">
 
     <Button
-        android:id="@+id/backButton"
+        android:id="@+id/backSettingsButton"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:background="@drawable/backbutton"
         android:text="-"
-        android:layout_marginBottom="5dp"
         />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TEAM VISION:"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textStyle="bold"
-        android:textColor="@color/black"
+        android:textColor="@color/maroon"
         android:layout_gravity="center_horizontal"
         android:layout_margin="10dp"/>
 
@@ -33,7 +31,7 @@
         android:textSize="14sp"
         android:lineSpacingExtra="2dp"
         android:textColor="@color/black"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="15dp"
         android:justificationMode="inter_word"
         android:layout_gravity="center_horizontal"/>
 
@@ -48,8 +46,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="DEVELOPERS:"
-        android:textColor="@color/black"
-        android:textSize="16sp"
+        android:textColor="@color/maroon"
+        android:textSize="18sp"
         android:textStyle="bold"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="15dp"/>
