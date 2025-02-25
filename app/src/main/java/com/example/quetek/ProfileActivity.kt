@@ -2,9 +2,11 @@ package com.example.quetek
 
 import android.app.Activity
 import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Window
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -27,8 +29,22 @@ class ProfileActivity : Activity() {
         var username = intent.getStringExtra("username") ?: "John Doe"
         var email = intent.getStringExtra("email") ?: "johndoe@gmail.com"
 
+        var dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.activity_logout)
+        dialog.window?.setBackgroundDrawable(getDrawable(R.drawable.rectanglelogoutdialog))
+
         usernameDisplay.text = username
         emailDisplay.text = email
+
+        val btnCancel = dialog.findViewById<Button>(R.id.btnCancel)
+        val btnLogout = dialog.findViewById<Button>(R.id.btnLogout)
+
+        btnCancel.setOnClickListener { dialog.dismiss() }
+        btnLogout.setOnClickListener {
+            Toast.makeText(this, "this will go back to the login page", Toast.LENGTH_LONG).show()
+        }
+
 
         backButton.setOnClickListener {
             Log.e("ProfileActivity", "will go back to my partner's page")
@@ -48,15 +64,17 @@ class ProfileActivity : Activity() {
         }
 
         logoutButton.setOnClickListener {
-            var logout = AlertDialog.Builder(this).setTitle("Logout Accout").setMessage("Are you sure you want to log out? Please confirm your action.")
-                .setPositiveButton("Confirm") { dialog, which ->
-                    Toast.makeText(this, "Confirm clicked,  this will go back to login", Toast.LENGTH_SHORT).show()
-                }
-                .setNegativeButton("Cancel") { dialog, which ->
-                    dialog.dismiss()
-                }
-                .create()
-            logout.show()
+            dialog.show()
         }
     }
 }
+
+//            var logout = AlertDialog.Builder(this).setTitle("Logout Accout").setMessage("Are you sure you want to log out? Please confirm your action.")
+//                .setPositiveButton("Confirm") { dialog, which ->
+//                    Toast.makeText(this, "Confirm clicked,  this will go back to login", Toast.LENGTH_SHORT).show()
+//                }
+//                .setNegativeButton("Cancel") { dialog, which ->
+//                    dialog.dismiss()
+//                }
+//                .create()
+//            logout.show()
