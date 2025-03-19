@@ -12,14 +12,17 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import checkInput
+import clearText
+import createIntent
+import getStringExtraSafe
+import getTextOrMessage
+import intentPutExtra
+import isEmailValid
 import org.w3c.dom.Text
-class EditProfileActivity : Activity() {
+import showToast
 
-    @SuppressLint("MissingInflatedId")
-    fun String.isEmailValid(): Boolean {
-        val emailRegex = "^[A-Za-z](.*)([@]{1})(.{1,})(\\.)(.{1,})"
-        return emailRegex.toRegex().matches(this)
-    }
+class EditProfileActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_profile)
@@ -29,20 +32,19 @@ class EditProfileActivity : Activity() {
         val email = findViewById<EditText>(R.id.emailInput)
         val usernameDisplay = findViewById<TextView>(R.id.usernameDisplay)
         val emailDisplay = findViewById<TextView>(R.id.emailDisplay)
-
         val updateButton = findViewById<Button>(R.id.updateButton)
+
         backProfileButton.setOnClickListener {
             val intent = Intent(this, ProfileActivity::class.java)
             startActivity(intent)
         }
 
-        var usernamePassed = intent.getStringExtra("username") ?: "John Doe"
-        var emailPassed = intent.getStringExtra("email") ?: "johndoe@gmail.com"
+        var usernamePassed = getStringExtraSafe("username", "John Doe")
+        var emailPassed = getStringExtraSafe("email", "johnDoe@cit.edu")
         usernameDisplay.text = usernamePassed
         emailDisplay.text = emailPassed
         username.setText(usernamePassed)
         email.setText(emailPassed)
-
 
         updateButton.setOnClickListener {
             when {
@@ -60,7 +62,7 @@ class EditProfileActivity : Activity() {
             }
 
             when {
-                !email.text.isNullOrBlank() && email.text.toString().isEmailValid() -> {
+                !email.text.isNullOrBlank() && email.isEmailValid() -> {
                     intent.putExtra("email", email.text.toString());
                 }
                 else -> {Toast.makeText(this, "Invalid input please try again", Toast.LENGTH_LONG).show()}
@@ -70,6 +72,5 @@ class EditProfileActivity : Activity() {
             email.setText("")
             startActivity(intent)
         }
-
     }
 }
